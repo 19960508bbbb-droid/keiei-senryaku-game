@@ -16,13 +16,11 @@ from matplotlib import rcParams
 
 # --- 日本語フォント設定 ---
 import matplotlib.font_manager as _fm
-_JP_FONTS = ["Meiryo", "MS Gothic", "Yu Gothic", "IPAexGothic", "Noto Sans CJK JP"]
+_fm._load_fontmanager(try_read_cache=False)
+_JP_FONTS = ["Noto Serif CJK JP", "Noto Sans CJK JP", "Meiryo", "MS Gothic", "Yu Gothic", "IPAexGothic"]
 _available = {f.name for f in _fm.fontManager.ttflist}
 _found = next((f for f in _JP_FONTS if f in _available), None)
-if _found:
-    rcParams["font.family"] = _found
-else:
-    rcParams["font.family"] = "sans-serif"
+rcParams["font.family"] = _found if _found else "sans-serif"
 rcParams["axes.unicode_minus"] = False
 
 # ============================================================
@@ -607,8 +605,8 @@ def render_title() -> None:
 
 | ステップ | 内容 | このゲームでは |
 |---|---|---|
-| **S**egmentation（市場細分化） | 市場を特性の似たグループに分ける | マス市場・プレミアム・バリュー・ニッチの4セグメント |
-| **T**argeting（ターゲット選定） | どのグループを狙うかを決める | ポジショニングマップで自社の位置を選択 |
+| **S**egmentation（セグメンテーション） | 市場を特性の似たグループに分ける | マス市場・プレミアム・バリュー・ニッチの4セグメント |
+| **T**argeting（ターゲティング） | どのグループを狙うかを決める | ポジショニングマップで自社の位置を選択 |
 | **P**ositioning（ポジショニング） | 競合との差別化を図る | 価格帯×品質帯の3×3マスで定義 |
 
 > **ポーターの競争戦略との関係**
